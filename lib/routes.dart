@@ -4,6 +4,7 @@ import 'pages/lista_receitas_page.dart';
 import 'pages/detalhe_receita_page.dart';
 import 'pages/favoritos_page.dart';
 
+
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -27,6 +28,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => FavoritosPage(),
         );
+
 
       default:
         return MaterialPageRoute(

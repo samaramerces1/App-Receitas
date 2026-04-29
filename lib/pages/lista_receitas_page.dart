@@ -35,20 +35,12 @@ class _ListaReceitasPageState extends State<ListaReceitasPage> {
         future: receitas,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
             return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'Erro: ${snapshot.error}',
-                  textAlign: TextAlign.center,
-                ),
-              ),
+              child: Text('Erro: ${snapshot.error}'),
             );
           }
 
@@ -60,27 +52,9 @@ class _ListaReceitasPageState extends State<ListaReceitasPage> {
               final receita = lista[index];
 
               return Card(
-                margin: const EdgeInsets.all(10),
-                child: ListTile(
-                  leading: Image.asset(
-                    receita['image'] ?? '',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        width: 80,
-                        height: 80,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image_not_supported),
-                      );
-                    },
-                  ),
-                  title: Text(_traduzirTitulo(receita['title'] ?? '')),
-                  subtitle: Text(
-                    'Tempo de preparo: ${receita['readyInMinutes']} min',
-                  ),
-                  trailing: const Icon(Icons.arrow_forward_ios),
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -88,6 +62,50 @@ class _ListaReceitasPageState extends State<ListaReceitasPage> {
                       arguments: Map<String, dynamic>.from(receita),
                     );
                   },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            receita['image'] ?? '',
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                width: 90,
+                                height: 90,
+                                color: Colors.grey[300],
+                                child: const Icon(Icons.image_not_supported),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _traduzirTitulo(receita['title'] ?? ''),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Tempo de preparo: ${receita['readyInMinutes']} min',
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.arrow_forward_ios),
+                      ],
+                    ),
+                  ),
                 ),
               );
             },

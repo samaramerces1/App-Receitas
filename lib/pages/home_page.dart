@@ -28,11 +28,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Encontre receitas simples, veja ingredientes, modo de preparo e salve suas favoritas.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
-              ),
+        
               const SizedBox(height: 40),
               SizedBox(
                 width: double.infinity,

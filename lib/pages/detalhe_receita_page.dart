@@ -46,7 +46,7 @@ class _DetalheReceitaPageState extends State<DetalheReceitaPage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset(
+                Image.network(
                   receita['image'] ?? '',
                   width: double.infinity,
                   height: 240,
