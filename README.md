@@ -98,7 +98,7 @@ git clone https://github.com/samaramerces1/App-Receitas.git
 
 ```bash
 cd App-Receitas
-```Mr Cooks*
+```Mestre Cuca
 
 3. Instale as dependências:
 
