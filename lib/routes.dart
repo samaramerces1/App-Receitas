@@ -5,15 +5,33 @@ import 'pages/detalhe_receita_page.dart';
 import 'pages/favoritos_page.dart';
 
 class AppRoutes {
-  static const home = '/';
-  static const receitas = '/receitas';
-  static const detalhe = '/detalhe';
-  static const favoritos = '/favoritos';
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(
+          builder: (_) => HomePage(),
+        );
 
-  static Map<String, WidgetBuilder> routes = {
-    home: (context) => HomePage(),
-    receitas: (context) => ListaReceitasPage(),
-    detalhe: (context) => DetalheReceitaPage(),
-    favoritos: (context) => FavoritosPage(),
-  };
+      case '/receitas':
+        return MaterialPageRoute(
+          builder: (_) => const ListaReceitasPage(),
+        );
+
+      case '/detalhe':
+        final receita = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => DetalheReceitaPage(receita: receita),
+        );
+
+      case '/favoritos':
+        return MaterialPageRoute(
+          builder: (_) => FavoritosPage(),
+        );
+
+      default:
+        return MaterialPageRoute(
+          builder: (_) => HomePage(),
+        );
+    }
+  }
 }
